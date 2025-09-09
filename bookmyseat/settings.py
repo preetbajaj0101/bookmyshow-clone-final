@@ -32,7 +32,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEBUG = True
 # DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['bookmyshow-clone-mauve.vercel.app', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+
+if not DEBUG:
+    RENDER_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+    if RENDER_HOSTNAME:
+        ALLOWED_HOSTS.append(RENDER_HOSTNAME)
 CSRF_TRUSTED_ORIGINS = ['https://bookmyshow-clone-mauve.vercel.app']
 
 
