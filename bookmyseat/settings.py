@@ -33,7 +33,9 @@ DEBUG = True
 # DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = ['bookmyshow-clone-mauve.vercel.app', '127.0.0.1','https://bookmyshow-clone-final-2.onrender.com/']
+
 CSRF_TRUSTED_ORIGINS = ['https://bookmyshow-clone-mauve.vercel.app']
+
 
 
 # Application definition
