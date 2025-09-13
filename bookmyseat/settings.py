@@ -153,6 +153,7 @@ STATIC_URL = 'static/'
 # settings.py
 
 # ... (all your other settings)
+'''
 if not DEBUG:
     # Get the hostname from the RENDER_EXTERNAL_HOSTNAME environment variable
     # provided by Render.
@@ -165,7 +166,8 @@ if not DEBUG:
 
     # Configure static files for production using whitenoise
     STATIC_ROOT = BASE_DIR / 'staticfiles'
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage
+    '''
 # ==============================================================================
 # VERCEL PRODUCTION SETTINGS
 # ==============================================================================
@@ -181,3 +183,17 @@ if 'VERCEL_URL' in os.environ:
     STATIC_ROOT = BASE_DIR / 'staticfiles'
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     '''
+# ==============================================================================
+# VERCEL PRODUCTION SETTINGS
+# ==============================================================================
+
+if 'VERCEL_URL' in os.environ:
+    # Configure allowed hosts to accept requests from your Vercel domain
+    ALLOWED_HOSTS = [os.environ.get('VERCEL_URL'), '.vercel.app']
+
+    # Configure CSRF trusted origins for secure POST requests
+    CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('VERCEL_URL')]
+
+    # Configure static files for production using whitenoise
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
